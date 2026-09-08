@@ -10,4 +10,7 @@ response = requests.post(
     },
 )
 
-print(response.json())
+print("STATUS:", response.status_code)
+print("HEADERS:", response.headers)
+print("RAW RESPONSE:")
+print(response.text)
