@@ -1,5 +1,6 @@
 **The LLM doesn't remember that previous API call by itself. Your application sends the relevant conversation state again.**
 
+```text
                 ┌───────────────┐
                 │     Qwen      │
                 │    LLM #1     │
@@ -25,7 +26,7 @@
                 │ Orchestrator  │
                 └───────┬───────┘
                         │
-              messages + 425
+                   messages + 425
                         │
                         ▼
                 ┌───────────────┐
@@ -35,26 +36,30 @@
                         │
                         ▼
                  "The answer is 425"
+```
 
 **json format!!**
 
-##LLM decides
-Should I use a tool?
-Which tool?
-What arguments?
+## LLM decides
 
-##Orchestrator controls
-Execute the tool
-Store the result
-Give the result back to LLM
-Call LLM again
-Detect final response
-Terminate the loop
+* Should I use a tool?
+* Which tool?
+* What arguments?
+
+## Orchestrator controls
+
+* Execute the tool
+* Store the result
+* Give the result back to LLM
+* Call LLM again
+* Detect final response
+* Terminate the loop
 
 **The LLM produces a response. The orchestrator interprets that response and decides whether another iteration is necessary.**
 
 **We've completed this orchestration step. Go back and ask the LLM again.**
 
+```text
 MESSAGE: assistant + tool_calls
         ↓
 TOOL NAME: calculator
@@ -74,20 +79,27 @@ NO tool_calls
 FINAL ANSWER
         ↓
 break
+```
 
-##Note it dobby!
+## Note it dobby!
+
+```text
 Does the LLM want another action?
         │
      ┌──┴──┐
-    YES    NO
-     │      │
-     ▼      ▼
- execute   finish
- tool      loop
+    YES   NO
+     │     │
+     ▼     ▼
+ execute  finish
+  tool     loop
+```
+
 **That's the core agent loop.**
 
-**So your mental model is now:
+**So your mental model is now:**
 
-LLM = decision maker
-Tools = capabilities
-Orchestrator = execution + state + control flow**
+**LLM = decision maker**
+
+**Tools = capabilities**
+
+**Orchestrator = execution + state + control flow**
